@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFK QUIZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="quiz-container">
+
+    <h1>PFK QUIZ</h1>
+    <p class="subtitle">Zgadnij kawałek 🎧</p>
+
+    <!-- WYBÓR CZASU -->
+    <section class="start-screen">
+
+        <h2>Wybierz czas fragmentu</h2>
+
+        <div class="time-buttons">
+
+            <button class="time-button" data-time="1">
+                1 SEKUNDA
+            </button>
+
+            <button class="time-button" data-time="5">
+                5 SEKUND
+            </button>
+
+            <button class="time-button" data-time="10">
+                10 SEKUND
+            </button>
+
+        </div>
+
+        <button id="start-button">
+            START
+        </button>
+
+    </section>
+
+
+    <!-- GRA -->
+    <section class="game-screen">
+
+        <p class="listen-text">
+            🎧 SŁUCHAJ UWAŻNIE!
+        </p>
+
+        <p id="question">
+            Jaki to kawałek?
+        </p>
+
+        <!-- JEDNO POLE ODPOWIEDZI -->
+        <input
+            type="text"
+            id="answer"
+            placeholder="Wpisz tytuł piosenki..."
+            autocomplete="off"
+        >
+
+        <button id="guess-button">
+            ZGADUJ
+        </button>
+
+        <p id="result"></p>
+
+
+        <div class="navigation-buttons">
+
+            <button id="next-button">
+                🎵 KOLEJNA PIOSENKA
+            </button>
+
+            <button id="back-button">
+                ↩️ COFNIJ
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="score">
+        Wynik:
+        <span id="score">0</span>
+        pkt
+    </div>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
