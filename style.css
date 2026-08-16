@@ -11,7 +11,11 @@ body {
     font-family: Arial, sans-serif;
 
     background:
-        radial-gradient(circle at top, #25203d, #0b0b12 60%);
+        radial-gradient(
+            circle at top,
+            #25203d,
+            #0b0b12 60%
+        );
 
     color: white;
 
@@ -67,7 +71,7 @@ h2 {
 }
 
 
-/* PRZYCISKI CZASU */
+/* CZAS */
 
 .time-buttons {
     display: flex;
@@ -150,7 +154,7 @@ h2 {
 }
 
 
-/* EKRAN GRY */
+/* GRA */
 
 .game-screen {
     display: none;
@@ -177,7 +181,18 @@ h2 {
 }
 
 
-/* POLE ODPOWIEDZI */
+/* ODTWARZACZ */
+
+#audio-player {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    display: none;
+}
+
+
+/* ODPOWIEDŹ */
 
 #answer {
     width: 100%;
@@ -241,7 +256,7 @@ h2 {
 }
 
 
-/* KOMUNIKAT */
+/* WYNIK ODPOWIEDZI */
 
 #result {
     margin-top: 20px;
