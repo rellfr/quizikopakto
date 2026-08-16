@@ -4,7 +4,6 @@
     padding: 0;
 }
 
-
 body {
     min-height: 100vh;
 
@@ -26,7 +25,6 @@ body {
     padding: 20px;
 }
 
-
 .quiz-container {
     width: 100%;
     max-width: 600px;
@@ -45,7 +43,6 @@ body {
         0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-
 h1 {
     font-size: 46px;
 
@@ -54,7 +51,6 @@ h1 {
     margin-bottom: 8px;
 }
 
-
 .subtitle {
     color: #aaaabc;
 
@@ -62,7 +58,6 @@ h1 {
 
     margin-bottom: 35px;
 }
-
 
 h2 {
     font-size: 20px;
@@ -85,7 +80,6 @@ h2 {
     margin-bottom: 25px;
 }
 
-
 .time-button {
     background: #222236;
 
@@ -104,13 +98,11 @@ h2 {
     transition: 0.2s;
 }
 
-
 .time-button:hover {
     background: #30304a;
 
     transform: translateY(-2px);
 }
-
 
 .time-button.selected {
     background: #6c4cff;
@@ -146,7 +138,6 @@ h2 {
     transition: 0.2s;
 }
 
-
 #start-button:hover {
     background: #7c61ff;
 
@@ -162,7 +153,6 @@ h2 {
     margin-top: 30px;
 }
 
-
 .listen-text {
     color: #aaaabc;
 
@@ -173,7 +163,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-
 #question {
     font-size: 24px;
 
@@ -181,13 +170,9 @@ h2 {
 }
 
 
-/* ODTWARZACZ */
+/* AUDIO */
 
 #audio-player {
-    width: 100%;
-
-    margin-bottom: 20px;
-
     display: none;
 }
 
@@ -214,14 +199,12 @@ h2 {
     margin-bottom: 12px;
 }
 
-
 #answer:focus {
     border-color: #6c4cff;
 
     box-shadow:
         0 0 15px rgba(108, 76, 255, 0.2);
 }
-
 
 #answer::placeholder {
     color: #77778c;
@@ -250,13 +233,12 @@ h2 {
     transition: 0.2s;
 }
 
-
 #guess-button:hover {
     background: #30304a;
 }
 
 
-/* WYNIK ODPOWIEDZI */
+/* INFORMACJA */
 
 #result {
     margin-top: 20px;
@@ -269,7 +251,7 @@ h2 {
 }
 
 
-/* PRZYCISKI NAWIGACJI */
+/* NAWIGACJA */
 
 .navigation-buttons {
     display: flex;
@@ -278,7 +260,6 @@ h2 {
 
     margin-top: 20px;
 }
-
 
 .navigation-buttons button {
     flex: 1;
@@ -300,20 +281,17 @@ h2 {
     transition: 0.2s;
 }
 
-
 .navigation-buttons button:hover {
     background: #30304a;
 
     transform: translateY(-2px);
 }
 
-
 #next-button {
     background: #6c4cff;
 
     border-color: #6c4cff;
 }
-
 
 #next-button:hover {
     background: #7c61ff;
@@ -329,7 +307,6 @@ h2 {
 
     font-size: 16px;
 }
-
 
 #score {
     color: white;
@@ -348,16 +325,13 @@ h2 {
         padding: 30px 20px;
     }
 
-
     h1 {
         font-size: 36px;
     }
 
-
     .navigation-buttons {
         flex-direction: column;
     }
-
 
     .time-button {
         width: 100%;
