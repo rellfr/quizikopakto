@@ -118,9 +118,7 @@ przyciskiCzasu.forEach(przycisk => {
     przycisk.addEventListener("click", () => {
 
         przyciskiCzasu.forEach(p => {
-
             p.classList.remove("selected");
-
         });
 
         przycisk.classList.add("selected");
@@ -151,7 +149,7 @@ function wylosujPiosenke() {
 
 
 /*
-    ODTWARZANIE
+    ODTWARZANIE FRAGMENTU
 */
 
 function odtworzFragment() {
@@ -162,12 +160,16 @@ function odtworzFragment() {
 
 
     /*
-        Zatrzymujemy poprzedni fragment
+        Zatrzymujemy poprzednią piosenkę
     */
 
     audio.pause();
 
     audio.currentTime = 0;
+
+    audio.removeAttribute("src");
+
+    audio.load();
 
 
     /*
@@ -177,59 +179,103 @@ function odtworzFragment() {
     audio.src =
         aktualnaPiosenka.plik;
 
-
-    audio.load();
-
-
-    /*
-        Włączamy dźwięk
-    */
-
-    audio.volume = 1;
+    audio.preload = "auto";
 
 
     /*
-        Odtwarzamy po załadowaniu
+        Po załadowaniu informacji o długości
+        losujemy punkt rozpoczęcia.
     */
 
-    audio.oncanplay = () => {
+    audio.onloadedmetadata = () => {
 
-        audio.currentTime = 0;
-
-        const odtwarzanie =
-            audio.play();
+        const dlugosc =
+            audio.duration;
 
 
-        if (odtwarzanie !== undefined) {
+        /*
+            Nie zaczynamy zbyt blisko końca.
+            Zostawiamy co najmniej 15 sekund.
+        */
 
-            odtwarzanie.catch(error => {
+        const wolneMiejsce =
+            Math.max(
+                0,
+                dlugosc - 15
+            );
 
-                console.error(
-                    "Błąd odtwarzania:",
-                    error
-                );
 
-                wynikTekst.textContent =
-                    "⚠️ Przeglądarka nie uruchomiła muzyki.";
+        /*
+            Losowy punkt startowy.
+        */
 
-            });
+        const losowyStart =
+            Math.random() * wolneMiejsce;
 
-        }
+
+        audio.currentTime =
+            losowyStart;
+
+
+        /*
+            Czekamy, aż przeglądarka będzie
+            gotowa do odtwarzania.
+        */
+
+        audio.oncanplay = () => {
+
+            /*
+                Usuwamy handler, żeby nie uruchomił
+                piosenki kilka razy.
+            */
+
+            audio.oncanplay = null;
+
+
+            /*
+                START AUDIO
+            */
+
+            audio.play()
+                .then(() => {
+
+                    /*
+                        WAŻNE:
+                        licznik zaczyna się dopiero
+                        po faktycznym rozpoczęciu muzyki.
+                    */
+
+                    setTimeout(() => {
+
+                        audio.pause();
+
+                        audio.currentTime = 0;
+
+                    }, wybranyCzas * 1000);
+
+                })
+                .catch(error => {
+
+                    console.error(
+                        "Błąd odtwarzania:",
+                        error
+                    );
+
+                    wynikTekst.textContent =
+                        "⚠️ Nie udało się odtworzyć muzyki.";
+
+                });
+
+        };
 
     };
 
 
     /*
-        Zatrzymujemy po wybranym czasie
+        Wymuszamy załadowanie pliku.
     */
 
-    setTimeout(() => {
-
-        audio.pause();
-
-        audio.currentTime = 0;
-
-    }, wybranyCzas * 1000);
+    audio.load();
 
 }
 
@@ -259,7 +305,7 @@ function rozpocznijRunde() {
 
 
 /*
-    START
+    START GRY
 */
 
 startButton.addEventListener("click", () => {
@@ -271,7 +317,6 @@ startButton.addEventListener("click", () => {
         );
 
         return;
-
     }
 
 
@@ -288,7 +333,7 @@ startButton.addEventListener("click", () => {
 
 
 /*
-    SPRAWDZANIE ODPOWIEDZI
+    ZGADYWANIE
 */
 
 przyciskZgaduj.addEventListener("click", () => {
