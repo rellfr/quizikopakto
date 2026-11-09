@@ -41,7 +41,7 @@ przyciskiCzasu.forEach(przycisk => {
     });
 });
 
-// ZATRZYMANIE AUDIO
+// ZATRZYMYWANIE AUDIO
 
 function zatrzymajAudio() {
     if (timerOdtwarzania !== null) {
@@ -86,7 +86,7 @@ async function odtworzFragment() {
             }
 
             const timeout = setTimeout(() => {
-                reject(new Error("Nie udało się załadować pliku audio."));
+                reject(new Error("Nie udało się załadować audio."));
             }, 10000);
 
             audio.addEventListener("loadedmetadata", () => {
@@ -96,12 +96,11 @@ async function odtworzFragment() {
 
             audio.addEventListener("error", () => {
                 clearTimeout(timeout);
-                reject(new Error("Błąd ładowania pliku audio."));
+                reject(new Error("Błąd ładowania audio."));
             }, { once: true });
         });
 
         const dlugosc = audio.duration;
-
         let maksymalnyStart = dlugosc - wybranyCzas;
 
         if (!Number.isFinite(maksymalnyStart) || maksymalnyStart < 0) {
@@ -118,7 +117,7 @@ async function odtworzFragment() {
             }
 
             const timeout = setTimeout(() => {
-                reject(new Error("Audio nie jest gotowe do odtwarzania."));
+                reject(new Error("Audio nie jest gotowe."));
             }, 10000);
 
             audio.addEventListener("canplay", () => {
@@ -128,7 +127,7 @@ async function odtworzFragment() {
 
             audio.addEventListener("error", () => {
                 clearTimeout(timeout);
-                reject(new Error("Błąd podczas przygotowywania audio."));
+                reject(new Error("Błąd przygotowania audio."));
             }, { once: true });
         });
 
@@ -148,17 +147,16 @@ async function odtworzFragment() {
         if (error.name === "AbortError") return;
 
         console.error("Błąd odtwarzania:", error);
-
-        wynikTekst.textContent =
-            "⚠️ Nie udało się odtworzyć muzyki.";
+        wynikTekst.textContent = "⚠️ Nie udało się odtworzyć muzyki.";
     }
 }
 
-// ROZPOCZĘCIE NOWEJ RUNDY
+// NOWA RUNDA
 
 function rozpocznijRunde() {
-    odpowiedzSprawdzona = false;
+    zatrzymajAudio();
 
+    odpowiedzSprawdzona = false;
     poleOdpowiedzi.value = "";
     wynikTekst.textContent = "";
 
@@ -202,23 +200,20 @@ przyciskZgaduj.addEventListener("click", () => {
         return;
     }
 
-    const poprawnaOdpowiedz = aktualnaPiosenka.tytul
-        .toLowerCase();
+    const poprawnaOdpowiedz =
+        aktualnaPiosenka.tytul.toLowerCase();
 
     if (odpowiedz === poprawnaOdpowiedz) {
         wynik++;
 
         wynikPunkty.textContent = wynik;
-
-        wynikTekst.textContent =
-            "🎉 DOBRZE! +1 punkt";
+        wynikTekst.textContent = "🎉 DOBRZE! +1 punkt";
 
     } else {
-        // RESET PUNKTÓW ZA BŁĘDNĄ ODPOWIEDŹ
+        // MAGICZNY RESET PUNKTÓW
 
         wynik = 0;
-
-        wynikPunkty.textContent = wynik;
+        wynikPunkty.textContent = 0;
 
         wynikTekst.textContent =
             "✨ TWOJE PUNKTY ZNIKNĘŁY JAK MAGIK! ✨ " +
